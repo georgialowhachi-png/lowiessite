@@ -25,6 +25,20 @@
         .star-rating.empty {
             color: #a0978d; /* Faded sepia for empty stars */
         }
+        /* Custom Progress Bar styling for a subtle sepia fill */
+        progress[value]::-webkit-progress-bar {
+            background-color: #e6e0d2; /* Light sepia track */
+            border-radius: 9999px;
+            border: 1px solid #a0978d;
+        }
+        progress[value]::-webkit-progress-value {
+            background-color: #463f39; /* Dark sepia fill */
+            border-radius: 9999px;
+        }
+        progress[value]::-moz-progress-bar {
+            background-color: #463f39; /* Dark sepia fill for Firefox */
+            border-radius: 9999px;
+        }
     </style>
 
     <script>
@@ -54,7 +68,7 @@
             </h1>
             <p class="mt-2 text-lg italic">// A place for quiet reading and loud opinions.</p>
             <nav class="mt-4">
-                <a href="index.html" class="text-dark-sepia hover:underline text-base font-bold">← Back to Reverie</a>
+                <a href="https://georgialowhachi-png.github.io/lowiessite/index.html" class="text-dark-sepia hover:underline text-base font-bold">← Back to Reverie</a>
             </nav>
         </header>
 
@@ -90,8 +104,21 @@
                         "A sudden immersion into the world of upper-class English melancholy and lush prose. The slow, perfect burn of memory and nostalgia feels exactly right for the late autumn reading schedule. I'm settling in for the long haul with the Flyte family."
                     </blockquote>
                     
-                    <div class="text-sm font-bold text-dark-sepia opacity-80 mt-2">
-                        Status: 45%
+                    <div class="mt-4">
+                        <label for="progress-br" class="text-sm font-bold text-dark-sepia opacity-80 block mb-1">
+                            Progress: 45%
+                        </label>
+                        <progress 
+                            id="progress-br" 
+                            value="45" 
+                            max="100" 
+                            class="w-full h-2 rounded-full overflow-hidden"
+                            style="
+                                appearance: none;
+                                -webkit-appearance: none;
+                                -moz-appearance: none;
+                            "
+                        ></progress>
                     </div>
                 </div>
             </div>
