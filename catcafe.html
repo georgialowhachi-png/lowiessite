@@ -12,6 +12,7 @@
         /* INHERITED STYLES FROM MAIN PAGE */
         body {
             font-family: 'Inconsolata', monospace;
+            /* 💖 CONFIRMED CORRECT BACKGROUND URL 💖 */
             background-image: url('https://i.pinimg.com/736x/39/74/5a/39745a87d13478fbe6f9fd911af47e47.jpg');
             background-size: cover; 
             background-attachment: fixed; 
@@ -127,38 +128,6 @@
             background-color: #2e2825; /* slightly darker sepia on hover */
         }
 
-        /* NEW: Progress Bar Styling */
-        #progressBar {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 100%;
-            height: 6px;
-            background: #e6e0d2; /* light sepia background */
-            border-radius: 3px;
-            cursor: pointer;
-            outline: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        #progressBar::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: #463f39; /* dark-sepia thumb */
-            cursor: pointer;
-        }
-
-        #progressBar::-moz-range-thumb {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: #463f39; /* dark-sepia thumb */
-            cursor: pointer;
-        }
-        
         /* Custom Nav Link Style (Moved to the nav bar) */
         .nav-reverie-button {
             background-color: #e6e0d2; /* Light sepia background */
@@ -195,13 +164,11 @@
 </head>
 <body class="p-4 sm:p-8 md:p-12 text-dark-sepia min-h-screen">
 
-    <audio id="bgMusic" src="C:\Users\Lexie Low\Downloads\tcmac.fr - Cafe jazz music - Soft Latte Grooves (256 KBps).mp3" loop muted></audio>
-
     <header class="max-w-4xl mx-auto mb-6 sm:mb-8">
         <div class="header-box">
             
             <img 
-                src="C:\Users\Lexie Low\Downloads\catvibe.png" 
+                src="https://i.imgur.com/CHUNFiF.png" 
                 alt="Lowie's Cafe Header Banner" 
                 class="header-cat-img-banner"
                 onerror="this.src='https://placehold.co/1000x150/463f39/e6e0d2?text=Lowie\'s+Cafe+Banner';"
@@ -217,7 +184,7 @@
                 <nav class="text-sm sm:text-base">
                     <ul class="flex space-x-3 items-center list-none p-0 m-0">
                         <li>
-                            <a href="lowiesblog.html" class="nav-reverie-button">
+                            <a href="index.html" class="nav-reverie-button">
                                 &lt; Back to Reverie
                             </a>
                         </li>
@@ -231,23 +198,6 @@
     <div id="main-content-wrapper">
 
         <div id="game-container" class="sepia-box flex-grow max-w-4xl">
-            
-            <div id="music-player" class="mb-6 p-3 border border-dark-sepia rounded-md bg-white flex items-center gap-4">
-                <button id="playPauseButton" class="sepia-button py-2 px-4 flex-shrink-0 text-lg sm:text-base">
-                    ▶ (Muted)
-                </button>
-                
-                <div class="flex-grow">
-                    <div id="audioTitle" class="text-sm font-semibold truncate mb-1">
-                        Soft Latte Grooves - Cafe Jazz
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span id="currentTime" class="text-xs font-mono">0:00</span>
-                        <input type="range" id="progressBar" value="0" max="100" class="w-full h-1 appearance-none cursor-pointer">
-                        <span id="durationTime" class="text-xs font-mono">0:00</span>
-                    </div>
-                </div>
-            </div>
             
             <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-dark-sepia">
                 Minigame: ᨐฅ⋆.˚☕︎ The Purrfect Order Match 
@@ -300,7 +250,7 @@
                 <p><strong>Adoption Status:</strong> Available!</p>
                 
                 <img 
-                    src="C:\Users\Lexie Low\Downloads\oia-uia.gif" 
+                    src="https://media.tenor.com/sbfBfp3FeY8AAAAj/oia-uia.gif" 
                     alt="A animated portrait of Ethel the cat"
                     class="w-full mt-4 rounded-md border border-dark-sepia"
                     onerror="this.src='https://placehold.co/300x200/463f39/e6e0d2?text=Ethel+Image';"
@@ -335,76 +285,9 @@
     </div> 
 
 <script>
-    /* --- AUDIO PLAYER LOGIC --- */
-
-    const music = document.getElementById('bgMusic');
-    const playPauseButton = document.getElementById('playPauseButton');
-    const progressBar = document.getElementById('progressBar');
-    const currentTimeEl = document.getElementById('currentTime');
-    const durationTimeEl = document.getElementById('durationTime');
-    let isPlaying = false; 
-
-    // Helper to format time (seconds to M:SS)
-    function formatTime(seconds) {
-        const minutes = Math.floor(seconds / 60);
-        const remainingSeconds = Math.floor(seconds % 60);
-        const paddedSeconds = String(remainingSeconds).padStart(2, '0');
-        return `${minutes}:${paddedSeconds}`;
-    }
-
-    function togglePlayPause() {
-        if (music.paused || music.ended) {
-            // If it's the first interaction, unmute and play
-            if (music.muted) {
-                music.muted = false;
-            }
-            music.play();
-            playPauseButton.innerHTML = '❚❚';
-            isPlaying = true;
-        } else {
-            music.pause();
-            playPauseButton.innerHTML = '▶';
-            isPlaying = false;
-        }
-    }
-
-    // Set duration and update button text once metadata is loaded
-    music.addEventListener('loadedmetadata', () => {
-        durationTimeEl.textContent = formatTime(music.duration);
-        progressBar.max = music.duration;
-        // Adjust button label to clearly indicate muted status on initial load
-        if (music.muted || music.paused) {
-             playPauseButton.innerHTML = '▶(Muted)';
-        }
-    });
-
-    // Update the progress bar and current time as music plays
-    music.addEventListener('timeupdate', () => {
-        progressBar.value = music.currentTime;
-        currentTimeEl.textContent = formatTime(music.currentTime);
-    });
-
-    // Handle user dragging the progress bar
-    progressBar.addEventListener('input', () => {
-        music.currentTime = progressBar.value;
-    });
-
-    // Update play/pause button text when muted state changes
-    music.addEventListener('volumechange', () => {
-        if (!music.muted && isPlaying) {
-             playPauseButton.innerHTML = '❚❚';
-        } else if (music.muted && isPlaying) {
-             playPauseButton.innerHTML = '❚❚';
-        } else if (music.muted && !isPlaying) {
-             playPauseButton.innerHTML = '▶(Muted)';
-        } else {
-             playPauseButton.innerHTML = '▶';
-        }
-    });
-
-    playPauseButton.addEventListener('click', togglePlayPause);
+    /* --- ETHEL SOUND LOGIC REMAINS --- */
     
-    // --- NEW LOGIC: Toggle Ethel's Embedded Sound Player ---
+    // Note: The main audio player logic (music, playPauseButton, progressBar) has been removed.
     
     const soundEmbed = document.getElementById('ehtel-sound-embed');
     const toggleButton = document.getElementById('toggle-sound-button');
@@ -424,28 +307,26 @@
     // Attach the new function to the circular button
     toggleButton.addEventListener('click', toggleEthelSound);
     
-    // --- JAVASCRIPT LOGIC FOR RANDOM, CONTINUOUS GAME (UPDATED FOR 6-CAT ROTATION) ---
+    /* --- JAVASCRIPT LOGIC FOR RANDOM, CONTINUOUS GAME (4-CAT ROTATION) --- */
 
     const ASSETS = {
-        'CAT_1_DEFAULT': 'C:\\Users\\Lexie Low\\Downloads\\starecat.jpg', 
-        'CAT_2_DEFAULT': 'C:\\Users\\Lexie Low\\Downloads\\42033722deefe4f5e249107f56e26cbe.jpg',
-        'CAT_3_DEFAULT': 'C:\\Users\\Lexie Low\\Downloads\\917741222663af4f7e2ab8680ee1a0c6.jpg',
-        'CAT_4_DEFAULT': 'C:\\Users\\Lexie Low\\Downloads\\634857e8150ee59a7dd7291878eda775.jpg',
-        'CAT_5_DEFAULT': 'C:\\Users\\Lexie Low\\Downloads\\f021ecfb624d5a2b8880791234c557cc.jpg',
-        'CAT_6_DEFAULT': 'C:\\Users\\Lexie Low\\Downloads\\09dfff61e631ad79c54a519070ea3efe.jpg',
+        // *** CORRECTED DIRECT IMAGE LINKS ***
+        'CAT_1_DEFAULT': 'https://i.imgur.com/T764Fin.jpeg', 
+        'CAT_2_DEFAULT': 'https://i.imgur.com/uel8IDL.jpeg',
+        'CAT_3_DEFAULT': 'https://i.imgur.com/JmRidrj.jpeg',
+        'CAT_4_DEFAULT': 'https://i.imgur.com/5QtOifq.jpeg',
         
-        'HAPPY_CAT_GIF': 'C:\\Users\\Lexie Low\\Downloads\\31a72afda250825d993400c3ef28c55c.gif',
-        'ANGRY_CAT_GIF': 'C:\\Users\\Lexie Low\\Downloads\\das-war-ein-befehl-das-war-ein-befehl-cat.gif',
+        // --- Cat Reaction GIFs (Previously updated) ---
+        'HAPPY_CAT_GIF': 'https://media.tenor.com/FPvJW5NgP9cAAAAi/happy-cat-cat.gif', 
+        'ANGRY_CAT_GIF': 'https://media1.tenor.com/m/XHamsaug7KoAAAAC/das-war-ein-befehl-das-war-ein-befehl-cat.gif',
     };
 
-    // Create a pool of all six cat images for rotation
+    // Create a pool of all four cat images for rotation
     const ALL_CAT_IMAGES = [
         ASSETS.CAT_1_DEFAULT,
         ASSETS.CAT_2_DEFAULT,
         ASSETS.CAT_3_DEFAULT,
         ASSETS.CAT_4_DEFAULT,
-        ASSETS.CAT_5_DEFAULT,
-        ASSETS.CAT_6_DEFAULT, 
     ];
 
     const AVAILABLE_ORDERS = {
@@ -455,7 +336,7 @@
         'cake': { dialogue: "A giant slice of sugary goodness." } 
     };
 
-    const CAT_STATION_IDS = ['cat-1', 'cat-2', 'cat-3'];
+    const CAT_STATION_IDS = ['cat-1', 'cat-2', 'cat-3']; // Still serving 3 cats per round
     const DRAGGABLE_ITEM_IDS = ['croissant', 'espresso', 'tea', 'cake']; 
 
     const messageBox = document.getElementById('message-box');
@@ -483,7 +364,7 @@
             .sort(() => 0.5 - Math.random()) 
             .slice(0, totalRounds); 
 
-        // RANDOMLY SELECT 3 UNIQUE CAT IMAGES from the pool of 6
+        // RANDOMLY SELECT 3 UNIQUE CAT IMAGES from the pool of 4
         const availableCatImages = [...ALL_CAT_IMAGES].sort(() => 0.5 - Math.random());
         const chosenCatImages = availableCatImages.slice(0, totalRounds);
 
@@ -513,7 +394,7 @@
             }
         });
 
-        messageBox.textContent = 'A new round begins! Match the orders!';
+        messageBox.textContent = 'Match the orders!';
         messageBox.style.color = '#463f39';
     }
 
@@ -531,7 +412,7 @@
         if (draggedItemId === catOrder) {
             // SUCCESS LOGIC
             
-            catVisual.src = ASSETS.HAPPY_CAT_GIF;
+            catVisual.src = ASSETS.HAPPY_CAT_GIF; 
             messageBox.textContent = `PURR-FECT! ${formatOrderKey(draggedItemId)} matched!`;
             messageBox.style.color = '#10b981'; 
 
@@ -555,7 +436,7 @@
 
         } else {
             // FAILURE LOGIC
-            catVisual.src = ASSETS.ANGRY_CAT_GIF;
+            catVisual.src = ASSETS.ANGRY_CAT_GIF; 
             
             let orderText = `That cat wanted the ${formatOrderKey(catOrder)}.`;
             
@@ -573,14 +454,7 @@
     }
     
     document.addEventListener('DOMContentLoaded', () => {
-        // This command ensures playback starts immediately (but muted)
-        music.play().then(() => {
-            isPlaying = true;
-        }).catch(error => {
-            console.log("Autoplay blocked. User interaction required:", error);
-            isPlaying = false;
-        });
-        
+        // Since music is removed, we only call the game initializer.
         startNewRound();
     });
 </script>
