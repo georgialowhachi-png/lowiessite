@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lowie's Library</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+        
+    <style>
+        /* Define the custom font and background blend (same as main page) */
+        body {
+            font-family: 'Inconsolata', monospace;
+            background-image: url('https://i.pinimg.com/736x/39/74/5a/39745a87d13478fbe6f9fd911af47e47.jpg');
+            background-size: cover; 
+            background-attachment: fixed; 
+            background-position: center center;
+            background-blend-mode: multiply;
+            background-color: #e6e0d2;
+        }
+        /* Custom Star Rating */
+        .star-rating {
+            color: #d1b46a; /* A subtle gold/amber color */
+        }
+        .star-rating.empty {
+            color: #a0978d; /* Faded sepia for empty stars */
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-sepia': '#463f39',
+                        // Note: Using a pale, slightly warm white for 'parchment' effect
+                        'parchment-white': '#fafafa', 
+                    },
+                    fontFamily: {
+                        'mono': ['Inconsolata', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="p-4 sm:p-8 md:p-12 text-dark-sepia min-h-screen">
+
+    <div class="max-w-6xl mx-auto space-y-8">
+
+        <header class="border border-dark-sepia p-4 sm:p-8 md:p-10 rounded-lg shadow-inner bg-parchment-white text-center">
+            <h1 class="text-4xl sm:text-5xl font-bold tracking-wider text-dark-sepia">
+                Lowie's Library <span class="ml-2 text-3xl">📖</span>
+            </h1>
+            <p class="mt-2 text-lg italic">// A place for quiet reading and loud opinions.</p>
+            <nav class="mt-4">
+                <a href="index.html" class="text-dark-sepia hover:underline text-base font-bold">← Back to Reverie</a>
+            </nav>
+        </header>
+
+
+        <section class="border border-dark-sepia p-4 sm:p-8 md:p-10 rounded-lg shadow-inner bg-parchment-white">
+            <h2 class="text-3xl font-bold mb-6 border-b border-dark-sepia pb-2">
+                Currently Reading (Nov/Dec)
+            </h2>
+            
+            <div class="flex flex-col md:flex-row gap-6">
+                
+                <div class="w-full md:w-1/4 flex-shrink-0">
+                    <img 
+                        src="https://placehold.co/300x450/463f39/e6e0d2?text=BOOK+COVER" 
+                        alt="Placeholder for Current Book Cover" 
+                        class="w-full h-auto object-cover rounded-md border border-dark-sepia shadow-xl"
+                    >
+                </div>
+
+                <div class="md:w-3/4">
+                    <h3 class="text-2xl font-bold mb-2">The Bell Jar</h3>
+                    <p class="text-lg italic mb-4">Sylvia Plath</p>
+                    
+                    <p class="text-base leading-relaxed mb-4">
+                        "The trouble was, I had been reading it wrong all this time. I thought the darkness was the point, but it's the stubborn flicker of the match against it. This book feels like a conversation you didn't know you needed to have with yourself in a small, cold room."
+                    </p>
+                    
+                    <div class="text-sm font-bold text-dark-sepia opacity-80 mt-2">
+                        Status: Chapter 14 of 20 (70% done)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="border border-dark-sepia p-4 sm:p-8 md:p-10 rounded-lg shadow-inner bg-parchment-white">
+            <h2 class="text-3xl font-bold mb-6 border-b border-dark-sepia pb-2">
+                Finished Reads (Recent)
+            </h2>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-dark-sepia/30">
+                    <thead class="bg-amber-100/50"> <tr>
+                            <th class="px-4 py-3 text-left text-sm font-bold uppercase tracking-wider">Title</th>
+                            <th class="px-4 py-3 text-left text-sm font-bold uppercase tracking-wider hidden sm:table-cell">Author</th>
+                            <th class="px-4 py-3 text-left text-sm font-bold uppercase tracking-wider hidden md:table-cell">Date Finished</th>
+                            <th class="px-4 py-3 text-center text-sm font-bold uppercase tracking-wider">Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-dark-sepia/10">
+                        
+                        <tr class="hover:bg-amber-50 transition duration-150">
+                            <td class="px-4 py-4 whitespace-nowrap font-bold">The Secret History</td>
+                            <td class="px-4 py-4 whitespace-nowrap hidden sm:table-cell">Donna Tartt</td>
+                            <td class="px-4 py-4 whitespace-nowrap hidden md:table-cell">Oct 2025 (Reread)</td>
+                            <td class="px-4 py-4 whitespace-nowrap text-center">
+                                <span class="star-rating">★★★★★</span>
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-amber-50 transition duration-150">
+                            <td class="px-4 py-4 whitespace-nowrap font-bold">Lonesome Dove</td>
+                            <td class="px-4 py-4 whitespace-nowrap hidden sm:table-cell">Larry McMurtry</td>
+                            <td class="px-4 py-4 whitespace-nowrap hidden md:table-cell">Sept 2025</td>
+                            <td class="px-4 py-4 whitespace-nowrap text-center">
+                                <span class="star-rating">★★★★</span><span class="star-rating empty">★</span>
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-amber-50 transition duration-150">
+                            <td class="px-4 py-4 whitespace-nowrap font-bold">A Scanner Darkly</td>
+                            <td class="px-4 py-4 whitespace-nowrap hidden sm:table-cell">Philip K. Dick</td>
+                            <td class="px-4 py-4 whitespace-nowrap hidden md:table-cell">Aug 2025</td>
+                            <td class="px-4 py-4 whitespace-nowrap text-center">
+                                <span class="star-rating">★★★</span><span class="star-rating empty">★★</span>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="text-sm mt-6 text-center opacity-70">
+                More in the archives... eventually.
+            </p>
+
+        </section>
+
+    </div>
+    
+</body>
+</html>

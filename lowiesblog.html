@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lowie's Reverie </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom scrollbar styling (retained for good measure) */
+        .sidebar-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .sidebar-content::-webkit-scrollbar-thumb {
+            background-color: #463f39; /* dark-sepia */
+            border-radius: 4px;
+        }
+        .sidebar-content::-webkit-scrollbar-track {
+            background: #e6e0d2; /* Light background */
+        }
+        /* Added class to restrict preformatted content height/scrolling */
+        .poem-content {
+            max-height: 200px; /* Adjust height as needed */
+            overflow-y: auto;
+            padding-right: 8px; /* For scrollbar padding */
+        }
+        .poem-content::-webkit-scrollbar-thumb {
+            background-color: #463f39;
+            border-radius: 4px;
+        }
+        .poem-content::-webkit-scrollbar-track {
+            background: #e6e0d2;
+        }
+        
+        /* BODY STYLES - CHECK YOUR BACKGROUND IMAGE PATH HERE! */
+        body {
+            font-family: 'Inconsolata', monospace;
+            
+            background-image: url('https://i.pinimg.com/736x/39/74/5a/39745a87d13478fbe6f9fd911af47e47.jpg'); /* KEPT ORIGINAL URL FOR STABILITY */
+            background-size: cover; 
+            background-attachment: fixed; 
+            background-position: center center;
+            background-blend-mode: multiply;
+            background-color: #e6e0d2; /* This is the color that shows through the blend, or if the image fails */
+            color: #463f39; /* Ensure text is readable */
+        }
+
+        /* NEW STYLE: Sepia Box - Applied to individual sections/entries/widgets */
+        .sepia-box {
+            border: 1px solid #463f39; /* dark-sepia border */
+            border-radius: 8px; /* Slightly more rounded than the original rounded-lg */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Clear shadow for definition */
+            background-color: rgba(255, 255, 255, 0.98); /* Near-white background */
+            padding: 1.5rem; /* Adjusted padding for internal spacing */
+        }
+
+        /* Fix the MAIN container to remove the white background *behind* the sepia boxes */
+        main {
+            background-color: transparent !important; /* Remove the main white background */
+            padding: 0 !important; /* Remove padding from the main wrapper */
+            box-shadow: none !important; /* Remove shadow from the main wrapper */
+        }
+    </style>
+
+    <script>
+        // Define custom configuration for Tailwind
+        tailwind.config = {
+            theme: {
+                extend: {
+                    
+                    colors: {
+                        'dark-sepia': '#463f39',
+                    },
+                    
+                    fontFamily: {
+                        'sans': ['Inconsolata', 'sans-serif'],
+                        'mono': ['Inconsolata', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="p-4 sm:p-8 md:p-12 text-dark-sepia min-h-screen">
+    
+    
+    <header class="max-w-6xl mx-auto mb-6 sm:mb-8">
+        <div class="sepia-box p-0 overflow-hidden"> 
+            
+            <div class="w-full">
+                <img
+                    src="https://i.imgur.com/aaWN621.png" 
+                    alt="Main header banner image"
+                    class="w-full h-auto object-cover rounded-t-lg"
+                    onerror="this.src='https://placehold.co/1000x250/463f39/e6e0d2?text=MAIN+HEADER+BANNER';"
+                >
+            </div>
+
+            <div class="p-4 sm:p-8 md:p-10 flex flex-col items-center">
+                
+                <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-center">
+                    Lowie's Reverie
+                    <span class="ml-2 text-xl">☾⋆⁺₊✧</span>
+                </h1>
+
+                <p class="text-base italic text-dark-sepia mt-1">
+                    // On Sleep, Books, and Heat Haze.
+                </p>
+                
+                <nav class="mt-4 text-sm sm:text-base">
+                    <ul class="flex flex-wrap justify-center space-x-3 items-center list-none p-0 m-0">
+                        <li><a href="about.html" class="hover:underline">about</a></li>
+                        <span class="text-xl leading-none pt-1">•</span>
+                        <li><a href="https://www.tumblr.com/blog/amarevicina" target="_blank" class="hover:underline">tumblr</a></li>
+                        <span class="text-xl leading-none pt-1">•</span>
+                        <li><a href="https://letterboxd.com/amarevicina/" target="_blank" class="hover:underline">letterboxd</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </header>
+    
+    <div class="max-w-6xl mx-auto mt-6 sm:mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+
+        <a href="catcafe.html" target="_blank" class="flex-1 no-underline">
+            <div class="w-full p-4 rounded-full shadow-md bg-dark-sepia text-white text-center italic text-lg sm:text-xl hover:bg-opacity-90 transition duration-300">
+                *☕︎⋆ Enter the Cafe!ིྀ*ੈ♡⸝⸝⋆
+            </div>
+        </a>
+
+        <a href="thelibrary.html" class="flex-1 no-underline">
+            <div class="w-full p-4 rounded-full shadow-md bg-dark-sepia text-white text-center italic text-lg sm:text-xl hover:bg-opacity-90 transition duration-300">
+                ⋅˚₊✍︎ Or the library? 🕮୧ ‧₊˚ ⋅ 
+            </div>
+        </a>
+
+        <a href="#portfolio" class="flex-1 no-underline">
+            <div class="w-full p-4 rounded-full shadow-md bg-dark-sepia text-white text-center italic text-lg sm:text-xl hover:bg-opacity-90 transition duration-300">
+                ✦ My Portfolio
+            </div>
+        </a>
+
+    </div>
+    <hr class="max-w-6xl mx-auto my-10 border-dark-sepia opacity-20">
+
+
+    <main class="max-w-6xl mx-auto">
+        
+        <div class="max-w-4xl mx-auto mb-8">
+             <div class="sepia-box"> 
+                <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+
+                    <div class="flex-shrink-0 w-full md:w-1/3 lg:w-1/4">
+                        <img 
+                            src="https://i.imgur.com/aTOepzs.jpg" 
+                            alt="A stylized image of a cat looking at a sandwich on a hat"
+                            class="w-full h-auto object-cover rounded-md"
+                            onerror="this.src='https://placehold.co/400x300/e9e4d9/463f39?text=Image%20Placeholder';"
+                        >
+                    </div>
+
+                    <div class="flex-grow md:w-2/3 lg:w-3/4">
+                        <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-dark-sepia text-center md:text-left">
+                            Welcome to my blog!
+                        </h2>
+                        
+                        <blockquote class="text-lg sm:text-xl italic leading-relaxed pt-2 md:pt-4">
+                            "One day I was counting the cats and I absent-mindedly counted myself."
+                            <footer class="mt-4 not-italic text-base sm:text-lg">— Bobbie Ann Mason</footer>
+                        </blockquote>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+    </main>
+    
+    <div class="max-w-4xl mx-auto mb-8">
+        <div class="sepia-box text-center text-xl font-bold p-3">
+             ݁₊ ⊹ . ݁ ⟡ ݁ . ⊹ ₊ ݁. ──── ‧₊˚♪ 𝄞₊˚⊹ ──── ݁₊ ⊹ . ݁ ⟡ ݁ . ⊹ ₊ ݁.
+        </div>
+    </div>
+    <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8">
+        
+        <div class="lg:w-2/3 space-y-8">
+            
+            <section class="space-y-8">
+                
+                <div class="sepia-box">
+                    <div class="flex flex-col-reverse md:flex-row gap-6 md:gap-10 items-start">
+                        
+                        <div class="md:w-1/2">
+                            <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-dark-sepia">
+                                Entry No. 1: A Folly in the Heat-Hazed Garden
+                            </h2>
+                            
+                            <p class="text-base sm:text-lg leading-relaxed mb-4">
+                                One day I found myself wandering through the scrappy patch of dirt and grass near home, the air thick with burnt wood and warm asphalt. In the heat and the humming of cicadas stood a great mango tree, its fruit claimed by red ants, its leaves holding the secrets of the universe—secrets it shared only with the wind and the passing stray cats.
+                            </p>
+                        </div>
+
+                        <div class="flex-shrink-0 w-full md:w-1/2">
+                            <img 
+                                src="https://i.imgur.com/MfIVF32.jpg" 
+                                alt="A cat standing in a bushy, dark garden"
+                                class="w-full h-auto object-cover rounded-md"
+                                onerror="this.src='https://placehold.co/400x300/e9e4d9/463f39?text=Entry%20Image%201';"
+                            >
+                        </div>
+                    </div>
+                </div>
+                
+            </section>
+
+            <a href="https://letterboxd.com/film/the-dreamers/" target="_blank" class="block no-underline hover:underline">
+                <div class="sepia-box mt-6 sm:mt-8 text-center italic text-lg sm:text-xl text-dark-sepia hover:bg-amber-50 transition duration-300">
+                    "Yes, I'm drunk. And you're beautiful. And tomorrow morning, I'll be sober but you'll still be beautiful."
+                </div>
+            </a>
+            
+            <hr class="max-w-full mx-auto my-10 border-dark-sepia opacity-20 lg:hidden">
+            
+            <section class="space-y-8">
+                
+                <div class="sepia-box">
+                    <div class="flex flex-col-reverse md:flex-row gap-6 md:gap-10 items-start">
+                        
+                        <div class="md:w-1/2">
+                            <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-dark-sepia">
+                                Entry No. 2: Daydreaming of a Northern Shore
+                            </h2>
+                            
+                            <p class="text-base sm:text-lg leading-relaxed mb-4">
+                                I’ve never loved beaches—too hot, too crowded—but I daydream about a different kind of shore: a cold, northern morning where the sea looks like dull silver and the sky hangs low enough to hush everything it touches.
+                            </p>
+                        </div>
+
+                        <div class="flex-shrink-0 w-full md:w-1/2">
+                            <img 
+                                src="https://i.imgur.com/8slPiVH.jpg" 
+                                alt="A cold, northern beach with a low sky"
+                                class="w-full h-auto object-cover rounded-md"
+                                onerror="this.src='https://placehold.co/400x300/e9e4d9/463f39?text=Placeholder%20for%20Entry%202';"
+                            >
+                        </div>
+                    </div>
+                </div>
+                
+            </section>
+            
+            <a href="https://vndb.org/v7738" target="_blank" class="block no-underline hover:underline">
+                <div class="sepia-box mt-6 sm:mt-8 text-center italic text-lg sm:text-xl text-dark-sepia hover:bg-amber-50 transition duration-300">
+                    "Life is like a staircase. You just gotta keep climbing. Otherwise, if you start to overthink it, you'll have trouble taking the next step."
+                </div>
+            </a>
+            
+            <hr class="max-w-full mx-auto my-10 border-dark-sepia opacity-20">
+
+            <section class="space-y-8">
+                
+                <div class="sepia-box">
+                    <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-dark-sepia text-center">
+                        Entry No. 3: Boshy Book Review (The Secret History)
+                    </h2>
+                    
+                    <div class="mb-6">
+                        <img 
+                            src="https://i.imgur.com/LGHG52x.png" 
+                            alt="A cat reading a dark academia themed book"
+                            class="w-full h-auto object-cover rounded-md"
+                            onerror="this.src='https://placehold.co/600x400/e9e4d9/463f39?text=Entry%203%20Image%20(Large)';"
+                        >
+                    </div>
+                    
+                    <div class="w-full">
+                        <p class="text-base sm:text-lg leading-relaxed pt-2">
+                            “Know thyself” has always been one of those Greek sayings that sticks, and maybe that’s why The Secret History is still my undisputed favorite (sorry Wuthering Heights, but loyalty is loyalty). I’ve read plenty since, yet nothing hits quite like this story of overeducated, bored college kids doing wildly questionable and depraved things just to feel like their lives matter a little more. I reread it recently, and it still feels like slipping into a dreamy fog—beautiful, unsettling, and strangely comforting in the way only a book about chaos and self-discovery can be.
+                        </p>
+                    </div>
+                    
+                </div>
+                
+            </section>
+            
+            <a href="https://allpoetry.com/mad-girl's-love-song" target="_blank" class="block no-underline hover:underline">
+                <div class="sepia-box mt-6 sm:mt-8 text-center italic text-lg sm:text-xl text-dark-sepia hover:bg-amber-50 transition duration-300">
+                    "I lift my lids and all is born again"
+                </div>
+            </a>
+            
+            <hr class="max-w-full mx-auto my-10 border-dark-sepia opacity-20">
+            
+            <section class="space-y-8">
+                
+                <div class="sepia-box">
+                    <div class="flex flex-col-reverse md:flex-row gap-6 md:gap-10 items-start">
+                        
+                        <div class="md:w-1/2">
+                            <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-dark-sepia">
+                                Entry No. 4: On Wasting Time and Paying Attention
+                            </h2>
+                            
+                            <p class="text-base sm:text-lg leading-relaxed mb-4">
+                                Lately I’ve been thinking about the quiet fear of wasting time—the way we all sometimes chase little bursts of stimulation, like mindlessly unspooling a toilet paper roll just to see it flutter. Annie Dillard said, “How we spend our days is, of course, how we spend our lives,” and the line hits like a soft warning. It makes me wonder how many moments I’ve traded for quick distractions, and how many I could reclaim by simply paying attention. Not in a strict, ascetic way—just… gentler, more aware, like choosing to savor minutes instead of letting them scatter.
+                            </p>
+                        </div>
+
+                        <div class="flex-shrink-0 w-full md:w-1/2">
+                            <img 
+                                src="https://i.imgur.com/SJ0GH82.png" 
+                                alt="A toilet roll unspooling to represent the passing of time"
+                                class="w-full h-auto object-cover rounded-md"
+                                onerror="this.src='https://placehold.co/400x300/e9e4d9/463f39?text=Entry%20Image%204';"
+                            >
+                        </div>
+                    </div>
+                </div>
+                
+            </section>
+            
+            <a href="https://www.goodreads.com/book/show/194740.The_Setting_Sun" target="_blank" class="block no-underline hover:underline">
+                <div class="sepia-box mt-6 sm:mt-8 text-center italic text-lg sm:text-xl text-dark-sepia hover:bg-amber-50 transition duration-300">
+                    "Man was born for love and revolution"
+                </div>
+            </a>
+            <hr class="max-w-full mx-auto my-10 border-dark-sepia opacity-20">
+
+            <section class="space-y-8">
+                <div class="sepia-box">
+                    <div class="flex flex-col-reverse md:flex-row gap-6 md:gap-10 items-start">
+                        
+                        <div class="md:w-1/2">
+                            <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-dark-sepia">
+                                Entry No. 5: The Passing Shadow
+                            </h2>
+                            
+                            <p class="text-base sm:text-lg leading-relaxed mb-4">
+                                Tonight, I saw a shadow pass across my window—slim, silent, and impossibly deliberate—and for a moment I couldn’t tell if it was my past self, sneaking back to warn me, or my future self, quietly checking in. I didn’t move; the night didn’t ask me to. I just watched, the glass cold against my palm, wondering which version of me would recognize the other first, and if recognition matters at all. Maybe you are reading this now, or maybe I am, but either way, I hope you remember that even in the dark, even in a quiet room, the self is always larger than the sum of its shadows.
+                            </p>
+                        </div>
+
+                        <div class="flex-shrink-0 w-full md:w-1/2">
+                            <img 
+                                src="https://i.imgur.com/PhKshIC.png" 
+                                alt="A stylized, lonely shadow passing across a window at night"
+                                class="w-full h-auto object-cover rounded-md"
+                                onerror="this.src='https://placehold.co/400x300/e9e4d9/463f39?text=Entry%20Image%205%20(Shadow)';">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </div>
+        
+        <aside class="lg:w-1/3 space-y-8">
+            <div class="sticky top-12 space-y-8">
+                
+                <div class="sepia-box">
+                    <h3 class="text-xl font-bold mb-4 text-center">
+                        🎧 Spotify
+                    </h3>
+                    
+                    <iframe 
+                        style="border-radius:12px" 
+                        src="https://open.spotify.com/embed/playlist/73VGnReJ1Bg0BN4G0HbgqQ?utm_source=generator"  width="100%" 
+                        height="352" 
+                        frameBorder="0" 
+                        allowfullscreen 
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+
+                <div class="sepia-box">
+                    <img 
+                        src="https://i.imgur.com/lhA8yFh.jpg" 
+                        alt="A cozy cat image" 
+                        class="w-full h-auto object-cover rounded-md mb-2"
+                        onerror="this.src='https://placehold.co/400x300/e9e4d9/463f39?text=Sidebar%20Cat%20Image';"
+                    >
+                    <p class="text-sm text-center">ᓚ₍ ^. .^₎</p>
+                </div>
+
+                <div class="sepia-box">
+                    <h3 class="text-lg font-bold mb-3 text-center text-dark-sepia">
+                        My Cats (By Charles Bukowski)
+                    </h3>
+                    <div class="poem-content"> 
+                        <pre class="text-sm leading-relaxed whitespace-pre-wrap">I know. I know.
+they are limited, have different
+needs and
+concerns.
+
+but i watch and learn from them.
+i like the little they know,
+which is so
+much.
+
+they complain but never
+worry,
+they walk with a surprising dignity.
+they sleep with a direct simplicity that
+humans just can't
+understand.
+
+their eyes are more
+beautiful than our eyes.
+and they can sleep 20 hours
+a day
+without
+hesitation or
+remorse.
+
+when i am feeling
+low
+all i have to do is</pre>
+                    </div>
+                </div>
+
+                <div class="sepia-box">
+                    <p class="text-center italic text-dark-sepia mb-4 text-base">
+                        “The moment I linger too long, the world tugs at my sleeve and whispers, move.”
+                    </p>
+                    <img 
+                        src="https://i.imgur.com/aaWN621.png" 
+                        alt="An image representing movement or urgency (now the header image)" 
+                        class="w-full h-auto object-cover rounded-md"
+                        onerror="this.src='https://placehold.co/400x300/e9e4d9/463f39?text=Image%20Placeholder';"
+                    >
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <div class="max-w-6xl mx-auto my-10">
+        <div class="sepia-box text-center text-xl font-bold p-3">
+            ✦ . 　⁺ 　 . ✦ . 　⁺ 　 . ✦
+        </div>
+    </div>
+    <footer class="max-w-6xl mx-auto mt-12 mb-4 text-center text-dark-sepia opacity-70 sepia-box">
+        <p class="text-sm">
+            Designed by Lexie Low | Art Attribution: Peter McCarty
+        </p>
+        <p class="text-xs mt-1">
+            Powered by HTML and JavaScript.
+        </p>
+    </footer>
+    </body>
+</html>

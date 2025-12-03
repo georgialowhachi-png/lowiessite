@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lowie's Cafe - The Purrfect Order Match</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* INHERITED STYLES FROM MAIN PAGE */
+        body {
+            font-family: 'Inconsolata', monospace;
+            background-image: url('https://i.pinimg.com/736x/39/74/5a/39745a87d13478fbe6f9fd911af47e47.jpg');
+            background-size: cover; 
+            background-attachment: fixed; 
+            background-position: center center;
+            background-blend-mode: multiply;
+            background-color: #e6e0d2;
+            color: #463f39; /* dark-sepia */
+        }
+
+        /* --- SUBPAGE LAYOUT STYLES --- */
+        #main-content-wrapper {
+            max-width: 1400px; /* Wider container for two columns */
+            margin: 0 auto;
+            padding: 0 10px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 15px; /* Space between the game and the new section */
+        }
+        
+        .sepia-box {
+            border: 1px solid #463f39; /* dark-sepia border */
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+        }
+
+        /* --- HEADER STYLES (UPDATED FOR IMAGE BANNER) --- */
+        .header-box {
+            border: 1px solid #463f39;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            padding: 0; /* Remove padding from the main box to let the image touch the edges */
+            overflow: hidden; /* Ensure image doesn't bleed out of rounded corners */
+        }
+
+        .header-cat-img-banner {
+            width: 100%;
+            height: 150px; /* Fixed height for a banner look */
+            object-fit: cover; /* Ensures the image covers the area without distortion, cropping if necessary */
+            display: block;
+        }
+
+        .header-content-container {
+            padding: 1rem 2rem; /* Add back padding inside for title and nav */
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        /* --- GAME-SPECIFIC STYLES (RETHEMED) --- */
+        #cats-area {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+
+        .cat-station {
+            width: 30%;
+            padding: 10px;
+            border: 2px dashed #a0522d; /* Softer, coffee-like dashed border */
+            border-radius: 8px;
+            background-color: #f7f3f9; /* Light background for cat stations */
+            transition: background-color 0.3s, border-color 0.3s;
+            min-height: 200px;
+        }
+
+        .order-text {
+            font-weight: 700;
+            color: #a0522d; /* A rich brown/coffee color for contrast */
+            margin-top: 5px;
+            font-style: italic;
+            min-height: 40px;
+        }
+
+        .coffee-visual {
+            background-color: #f4e8c1; /* Light cream/tan color for drinks/food */
+            box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+            width: 16px; 
+            height: 16px; 
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            cursor: grab;
+            transition: opacity 0.3s, transform 0.1s;
+        }
+
+        /* Added specific sizing for better layout control */
+        .cat-visual {
+            width: 80px;
+            height: 80px;
+            display: block;
+            margin: 10px auto;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        /* Button styling inherited from the main page palette */
+        .sepia-button {
+             background-color: #463f39; /* dark-sepia background */
+             color: white; /* white text */
+             border: 1px solid #463f39;
+             padding: 8px;
+             border-radius: 4px;
+             transition: background-color 0.3s;
+        }
+
+        .sepia-button:hover {
+            background-color: #2e2825; /* slightly darker sepia on hover */
+        }
+
+        /* NEW: Progress Bar Styling */
+        #progressBar {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #e6e0d2; /* light sepia background */
+            border-radius: 3px;
+            cursor: pointer;
+            outline: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #progressBar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #463f39; /* dark-sepia thumb */
+            cursor: pointer;
+        }
+
+        #progressBar::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #463f39; /* dark-sepia thumb */
+            cursor: pointer;
+        }
+        
+        /* Custom Nav Link Style (Moved to the nav bar) */
+        .nav-reverie-button {
+            background-color: #e6e0d2; /* Light sepia background */
+            color: #463f39; /* Dark sepia text */
+            border: 1px solid #463f39;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px; /* Pill shape */
+            font-weight: 700;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+            white-space: nowrap;
+        }
+        .nav-reverie-button:hover {
+            background-color: #463f39; /* dark-sepia background */
+            color: white; /* white text */
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-sepia': '#463f39',
+                    },
+                    fontFamily: {
+                        'sans': ['Inconsolata', 'sans-serif'],
+                        'mono': ['Inconsolata', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="p-4 sm:p-8 md:p-12 text-dark-sepia min-h-screen">
+
+    <audio id="bgMusic" src="C:\Users\Lexie Low\Downloads\tcmac.fr - Cafe jazz music - Soft Latte Grooves (256 KBps).mp3" loop muted></audio>
+
+    <header class="max-w-4xl mx-auto mb-6 sm:mb-8">
+        <div class="header-box">
+            
+            <img 
+                src="C:\Users\Lexie Low\Downloads\catvibe.png" 
+                alt="Lowie's Cafe Header Banner" 
+                class="header-cat-img-banner"
+                onerror="this.src='https://placehold.co/1000x150/463f39/e6e0d2?text=Lowie\'s+Cafe+Banner';"
+            >
+            
+            <div class="header-content-container">
+                
+                <h1 class="text-3xl sm:text-4xl font-bold tracking-tight flex items-center">
+                    Lowie's Cafe 
+                    <span class="ml-2 text-xl">‧₊˚ ⋅ ☕︎ 𓎩 ‧₊˚ ⋅</span>
+                </h1>
+                
+                <nav class="text-sm sm:text-base">
+                    <ul class="flex space-x-3 items-center list-none p-0 m-0">
+                        <li>
+                            <a href="lowiesblog.html" class="nav-reverie-button">
+                                &lt; Back to Reverie
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </header>
+    
+    <div id="main-content-wrapper">
+
+        <div id="game-container" class="sepia-box flex-grow max-w-4xl">
+            
+            <div id="music-player" class="mb-6 p-3 border border-dark-sepia rounded-md bg-white flex items-center gap-4">
+                <button id="playPauseButton" class="sepia-button py-2 px-4 flex-shrink-0 text-lg sm:text-base">
+                    ▶ (Muted)
+                </button>
+                
+                <div class="flex-grow">
+                    <div id="audioTitle" class="text-sm font-semibold truncate mb-1">
+                        Soft Latte Grooves - Cafe Jazz
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span id="currentTime" class="text-xs font-mono">0:00</span>
+                        <input type="range" id="progressBar" value="0" max="100" class="w-full h-1 appearance-none cursor-pointer">
+                        <span id="durationTime" class="text-xs font-mono">0:00</span>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-dark-sepia">
+                Minigame: ᨐฅ⋆.˚☕︎ The Purrfect Order Match 
+            </h2>
+            
+            <div id="message-box" class="text-xl font-bold my-4" style="color:#463f39;">...Initializing Game...</div>
+
+            <div id="cats-area" class="flex justify-around mb-6">
+                
+                <div class="cat-station" id="cat-1" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <img class="cat-visual" id="cat-visual-1" src="" alt="Cat 1 waiting for order">
+                    <p class="order-text text-sm"></p>
+                </div>
+
+                <div class="cat-station" id="cat-2" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <img class="cat-visual" id="cat-visual-2" src="" alt="Cat 2 waiting for order">
+                    <p class="order-text text-sm"></p>
+                </div>
+                
+                <div class="cat-station" id="cat-3" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <img class="cat-visual" id="cat-visual-3" src="" alt="Cat 3 waiting for order">
+                    <p class="order-text text-sm"></p>
+                </div>
+            </div>
+
+            <hr class="border-dark-sepia opacity-30 my-4">
+
+            <h3 class="text-xl font-bold mb-4">Available Treats & Beverages (Drag Me):</h3>
+            <div id="coffees-area" class="flex justify-center gap-4 p-3">
+                <div class="coffee-visual w-16 h-16 rounded-xl flex items-center justify-center text-3xl cursor-grab" draggable="true" ondragstart="drag(event)" id="croissant">🥐</div> 
+                
+                <div class="coffee-visual w-16 h-16 rounded-xl flex items-center justify-center text-3xl cursor-grab" draggable="true" ondragstart="drag(event)" id="espresso">☕</div>
+                <div class="coffee-visual w-16 h-16 rounded-xl flex items-center justify-center text-3xl cursor-grab" draggable="true" ondragstart="drag(event)" id="tea">🍵</div> 
+                
+                <div class="coffee-visual w-16 h-16 rounded-xl flex items-center justify-center text-3xl cursor-grab" draggable="true" ondragstart="drag(event)" id="cake">🍰</div> 
+            </div>
+        </div>
+        
+        <div id="cat-info-module" class="sepia-box w-full md:w-1/3 max-w-sm sticky top-0">
+            <h3 class="text-xl font-bold mb-4 border-b border-dark-sepia pb-2">
+                Today's Featured Cat: Ethel
+            </h3>
+            <p class="text-sm italic mb-4">
+                "Every visitor must give Ethel a gentle ear scratch before ordering."
+            </p>
+            <div class="text-sm">
+                <p><strong>Name:</strong> Ethel</p>
+                <p><strong>Age:</strong> 8 years old</p>
+                <p><strong>Personality:</strong> Quiet but judgmental.</p>
+                <p><strong>Adoption Status:</strong> Available!</p>
+                
+                <img 
+                    src="C:\Users\Lexie Low\Downloads\oia-uia.gif" 
+                    alt="A animated portrait of Ethel the cat"
+                    class="w-full mt-4 rounded-md border border-dark-sepia"
+                    onerror="this.src='https://placehold.co/300x200/463f39/e6e0d2?text=Ethel+Image';"
+                >
+                
+                <iframe 
+                    id="ehtel-sound-embed"
+                    width="110" height="200" 
+                    src="https://www.myinstants.com/instant/oiia-oiia-sound-92058/embed/" 
+                    frameborder="0" scrolling="no" 
+                    class="mt-4 mx-auto block hidden">
+                </iframe>
+
+                <button 
+                    id="toggle-sound-button"
+                    class="
+                        w-16 h-16 
+                        rounded-full 
+                        sepia-button 
+                        hover:bg-opacity-80 
+                        transition duration-300 
+                        text-4xl 
+                        flex items-center justify-center 
+                        mx-auto mt-4 
+                        shadow-lg
+                    ">
+                    ♪
+                </button>
+            </div>
+        </div>
+
+    </div> 
+
+<script>
+    /* --- AUDIO PLAYER LOGIC --- */
+
+    const music = document.getElementById('bgMusic');
+    const playPauseButton = document.getElementById('playPauseButton');
+    const progressBar = document.getElementById('progressBar');
+    const currentTimeEl = document.getElementById('currentTime');
+    const durationTimeEl = document.getElementById('durationTime');
+    let isPlaying = false; 
+
+    // Helper to format time (seconds to M:SS)
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        const paddedSeconds = String(remainingSeconds).padStart(2, '0');
+        return `${minutes}:${paddedSeconds}`;
+    }
+
+    function togglePlayPause() {
+        if (music.paused || music.ended) {
+            // If it's the first interaction, unmute and play
+            if (music.muted) {
+                music.muted = false;
+            }
+            music.play();
+            playPauseButton.innerHTML = '❚❚';
+            isPlaying = true;
+        } else {
+            music.pause();
+            playPauseButton.innerHTML = '▶';
+            isPlaying = false;
+        }
+    }
+
+    // Set duration and update button text once metadata is loaded
+    music.addEventListener('loadedmetadata', () => {
+        durationTimeEl.textContent = formatTime(music.duration);
+        progressBar.max = music.duration;
+        // Adjust button label to clearly indicate muted status on initial load
+        if (music.muted || music.paused) {
+             playPauseButton.innerHTML = '▶(Muted)';
+        }
+    });
+
+    // Update the progress bar and current time as music plays
+    music.addEventListener('timeupdate', () => {
+        progressBar.value = music.currentTime;
+        currentTimeEl.textContent = formatTime(music.currentTime);
+    });
+
+    // Handle user dragging the progress bar
+    progressBar.addEventListener('input', () => {
+        music.currentTime = progressBar.value;
+    });
+
+    // Update play/pause button text when muted state changes
+    music.addEventListener('volumechange', () => {
+        if (!music.muted && isPlaying) {
+             playPauseButton.innerHTML = '❚❚';
+        } else if (music.muted && isPlaying) {
+             playPauseButton.innerHTML = '❚❚';
+        } else if (music.muted && !isPlaying) {
+             playPauseButton.innerHTML = '▶(Muted)';
+        } else {
+             playPauseButton.innerHTML = '▶';
+        }
+    });
+
+    playPauseButton.addEventListener('click', togglePlayPause);
+    
+    // --- NEW LOGIC: Toggle Ethel's Embedded Sound Player ---
+    
+    const soundEmbed = document.getElementById('ehtel-sound-embed');
+    const toggleButton = document.getElementById('toggle-sound-button');
+
+    function toggleEthelSound() {
+        // Toggles the 'hidden' class on the iframe
+        soundEmbed.classList.toggle('hidden');
+        
+        // Change button text to indicate state
+        if (soundEmbed.classList.contains('hidden')) {
+            toggleButton.textContent = '♪'; // Sound hidden
+        } else {
+            toggleButton.textContent = '✖'; // Sound visible (X to close)
+        }
+    }
+
+    // Attach the new function to the circular button
+    toggleButton.addEventListener('click', toggleEthelSound);
+    
+    // --- JAVASCRIPT LOGIC FOR RANDOM, CONTINUOUS GAME (UPDATED FOR 6-CAT ROTATION) ---
+
+    const ASSETS = {
+        'CAT_1_DEFAULT': 'C:\\Users\\Lexie Low\\Downloads\\starecat.jpg', 
+        'CAT_2_DEFAULT': 'C:\\Users\\Lexie Low\\Downloads\\42033722deefe4f5e249107f56e26cbe.jpg',
+        'CAT_3_DEFAULT': 'C:\\Users\\Lexie Low\\Downloads\\917741222663af4f7e2ab8680ee1a0c6.jpg',
+        'CAT_4_DEFAULT': 'C:\\Users\\Lexie Low\\Downloads\\634857e8150ee59a7dd7291878eda775.jpg',
+        'CAT_5_DEFAULT': 'C:\\Users\\Lexie Low\\Downloads\\f021ecfb624d5a2b8880791234c557cc.jpg',
+        'CAT_6_DEFAULT': 'C:\\Users\\Lexie Low\\Downloads\\09dfff61e631ad79c54a519070ea3efe.jpg',
+        
+        'HAPPY_CAT_GIF': 'C:\\Users\\Lexie Low\\Downloads\\31a72afda250825d993400c3ef28c55c.gif',
+        'ANGRY_CAT_GIF': 'C:\\Users\\Lexie Low\\Downloads\\das-war-ein-befehl-das-war-ein-befehl-cat.gif',
+    };
+
+    // Create a pool of all six cat images for rotation
+    const ALL_CAT_IMAGES = [
+        ASSETS.CAT_1_DEFAULT,
+        ASSETS.CAT_2_DEFAULT,
+        ASSETS.CAT_3_DEFAULT,
+        ASSETS.CAT_4_DEFAULT,
+        ASSETS.CAT_5_DEFAULT,
+        ASSETS.CAT_6_DEFAULT, 
+    ];
+
+    const AVAILABLE_ORDERS = {
+        'croissant': { dialogue: "I demand a flaky pastry treat, please." },
+        'espresso': { dialogue: "A tiny cup of pure black coffee!" },
+        'tea': { dialogue: "Something warm... with leaves and water." },
+        'cake': { dialogue: "A giant slice of sugary goodness." } 
+    };
+
+    const CAT_STATION_IDS = ['cat-1', 'cat-2', 'cat-3'];
+    const DRAGGABLE_ITEM_IDS = ['croissant', 'espresso', 'tea', 'cake']; 
+
+    const messageBox = document.getElementById('message-box');
+    let matchedCount = 0;
+    const totalRounds = CAT_STATION_IDS.length; 
+
+    function allowDrop(event) {
+        event.preventDefault();
+    }
+
+    function drag(event) {
+        event.dataTransfer.setData("text", event.target.id);
+    }
+
+    // Helper function to format the key for display 
+    function formatOrderKey(key) {
+        return key.toUpperCase().replace('_', ' ');
+    }
+    
+    function startNewRound() {
+        matchedCount = 0;
+        const possibleOrderKeys = Object.keys(AVAILABLE_ORDERS);
+
+        const shuffledOrders = possibleOrderKeys
+            .sort(() => 0.5 - Math.random()) 
+            .slice(0, totalRounds); 
+
+        // RANDOMLY SELECT 3 UNIQUE CAT IMAGES from the pool of 6
+        const availableCatImages = [...ALL_CAT_IMAGES].sort(() => 0.5 - Math.random());
+        const chosenCatImages = availableCatImages.slice(0, totalRounds);
+
+        CAT_STATION_IDS.forEach((catId, index) => {
+            const station = document.getElementById(catId);
+            const orderKey = shuffledOrders[index];
+            const orderDetails = AVAILABLE_ORDERS[orderKey];
+            const catImagePath = chosenCatImages[index]; // Assign a random cat image
+            
+            station.style.border = '2px dashed #a0522d'; 
+            station.ondrop = drop;
+            station.ondragover = allowDrop;
+
+            station.setAttribute('data-order', orderKey);
+            // Store the assigned image path to correctly reset the cat after an error
+            station.setAttribute('data-default-img', catImagePath); 
+            station.querySelector('.cat-visual').src = catImagePath; // Use the rotating image
+            station.querySelector('.order-text').innerHTML = `Wants the ${formatOrderKey(orderKey)}: ${orderDetails.dialogue}`;
+        });
+        
+        DRAGGABLE_ITEM_IDS.forEach(itemId => {
+            const item = document.getElementById(itemId);
+            if (item) {
+                item.style.opacity = 1;
+                item.draggable = true;
+                item.style.cursor = 'grab';
+            }
+        });
+
+        messageBox.textContent = 'A new round begins! Match the orders!';
+        messageBox.style.color = '#463f39';
+    }
+
+    function drop(event) {
+        event.preventDefault();
+        const draggedItemId = event.dataTransfer.getData("text");
+        const dropTarget = event.currentTarget;
+
+        if (!dropTarget || !dropTarget.classList.contains('cat-station') || dropTarget.ondrop === null) return;
+
+        const catOrder = dropTarget.getAttribute('data-order');
+        const catVisual = dropTarget.querySelector('.cat-visual');
+        const coffeeElement = document.getElementById(draggedItemId);
+
+        if (draggedItemId === catOrder) {
+            // SUCCESS LOGIC
+            
+            catVisual.src = ASSETS.HAPPY_CAT_GIF;
+            messageBox.textContent = `PURR-FECT! ${formatOrderKey(draggedItemId)} matched!`;
+            messageBox.style.color = '#10b981'; 
+
+            if (coffeeElement) {
+                coffeeElement.style.opacity = 0.3; 
+                coffeeElement.draggable = false;
+                coffeeElement.style.cursor = 'default';
+            }
+            dropTarget.ondrop = null; 
+            dropTarget.ondragover = null;
+            dropTarget.style.border = '2px solid #10b981'; 
+            
+            matchedCount++;
+            
+            if (matchedCount === totalRounds) {
+                messageBox.textContent = 'ALL ORDERS COMPLETE! Starting new round in 3 seconds...';
+                messageBox.style.color = '#10b981'; 
+                
+                setTimeout(startNewRound, 3000);
+            }
+
+        } else {
+            // FAILURE LOGIC
+            catVisual.src = ASSETS.ANGRY_CAT_GIF;
+            
+            let orderText = `That cat wanted the ${formatOrderKey(catOrder)}.`;
+            
+            messageBox.textContent = `HSSSS! Wrong item! ${orderText}`;
+            messageBox.style.color = '#dc2626'; 
+
+            // Reset the cat reaction after a short delay
+            setTimeout(() => {
+                // Use the stored default image for this specific station
+                catVisual.src = dropTarget.getAttribute('data-default-img'); 
+                messageBox.textContent = 'Try again! Drag a beverage/treat to the correct cat.';
+                messageBox.style.color = '#463f39';
+            }, 1500);
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        // This command ensures playback starts immediately (but muted)
+        music.play().then(() => {
+            isPlaying = true;
+        }).catch(error => {
+            console.log("Autoplay blocked. User interaction required:", error);
+            isPlaying = false;
+        });
+        
+        startNewRound();
+    });
+</script>
+</body>
+</html>
