@@ -144,6 +144,27 @@
             background-color: #463f39; /* dark-sepia background */
             color: white; /* white text */
         }
+        
+        /* New Styles for Reviews - Updated for whimsical look */
+        .cat-review {
+            border-left: 4px solid #a0522d;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #f7f3f9;
+            border-radius: 4px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* NEW MAP STYLES - Updated for the new <img> element */
+        .map-container .map-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover; /* Ensures the image fills the space */
+            border: 1px solid #463f39;
+            border-radius: 4px;
+            margin-top: 10px;
+            display: block;
+        }
     </style>
 
     <script>
@@ -195,6 +216,17 @@
         </div>
     </header>
     
+    <div class="max-w-4xl mx-auto mb-6">
+        <div class="sepia-box text-center">
+            <h2 class="text-2xl font-bold mb-3 text-dark-sepia flex items-center justify-center">
+                <span class="mr-2">【┘】</span> The History of Lowie's Cafe
+            </h2>
+            <p class="text-sm md:text-base italic max-w-3xl mx-auto leading-relaxed">
+                Lowie's Cafe was founded in 1946, the owner simply wished for a quiet corner to read her books. Legend says the cafe was instantly claimed by a large, ginger tomcat named Congressmeow, who demanded a slice of cake for every patron. Since then, the establishment has been strictly governed by the whims of its feline residents. We maintain the original policy: quiet contemplation, excellent pastries, and absolute fealty to the nearest cat.
+            </p>
+        </div>
+    </div>
+    
     <div id="main-content-wrapper">
 
         <div id="game-container" class="sepia-box flex-grow max-w-4xl">
@@ -234,55 +266,98 @@
                 
                 <div class="coffee-visual w-16 h-16 rounded-xl flex items-center justify-center text-3xl cursor-grab" draggable="true" ondragstart="drag(event)" id="cake">🍰</div> 
             </div>
-        </div>
-        
-        <div id="cat-info-module" class="sepia-box w-full md:w-1/3 max-w-sm sticky top-0">
-            <h3 class="text-xl font-bold mb-4 border-b border-dark-sepia pb-2">
-                Today's Featured Cat: Ethel
+            
+            <hr class="border-dark-sepia opacity-30 my-4">
+            
+            <h3 class="text-xl font-bold mb-4 border-b border-dark-sepia pb-2 flex items-center">
+                <span class="mr-2">ˎˊ˗⋆｡</span> Catstomer Reviews (No Coercion, We Promise)
             </h3>
-            <p class="text-sm italic mb-4">
-                "Every visitor must give Ethel a gentle ear scratch before ordering."
-            </p>
-            <div class="text-sm">
-                <p><strong>Name:</strong> Ethel</p>
-                <p><strong>Age:</strong> 8 years old</p>
-                <p><strong>Personality:</strong> Quiet but judgmental.</p>
-                <p><strong>Adoption Status:</strong> Available!</p>
-                
-                <img 
-                    src="https://media.tenor.com/sbfBfp3FeY8AAAAj/oia-uia.gif" 
-                    alt="A animated portrait of Ethel the cat"
-                    class="w-full mt-4 rounded-md border border-dark-sepia"
-                    onerror="this.src='https://placehold.co/300x200/463f39/e6e0d2?text=Ethel+Image';"
-                >
-                
-                <iframe 
-                    id="ehtel-sound-embed"
-                    width="110" height="200" 
-                    src="https://www.myinstants.com/instant/oiia-oiia-sound-92058/embed/" 
-                    frameborder="0" scrolling="no" 
-                    class="mt-4 mx-auto block hidden">
-                </iframe>
-
-                <button 
-                    id="toggle-sound-button"
-                    class="
-                        w-16 h-16 
-                        rounded-full 
-                        sepia-button 
-                        hover:bg-opacity-80 
-                        transition duration-300 
-                        text-4xl 
-                        flex items-center justify-center 
-                        mx-auto mt-4 
-                        shadow-lg
-                    ">
-                    ♪
-                </button>
+            
+            <div class="cat-review">
+                <p class="text-xl mb-1">★★☆☆☆</p>
+                <p class="font-bold">Baron von Floof III <span class="text-sm font-normal">(Maine Coon)</span></p>
+                <p class="text-sm italic">"The human barista tried to give me the 'espresso' when I explicitly ordered the 'cake.' A serious insult to my dignity. The nap blanket was sufficiently fluffy, however, preventing a total loss of stars."</p>
+            </div>
+            
+            <div class="cat-review">
+                <p class="text-xl mb-1">★★★★★</p>
+                <p class="font-bold">Princess Fizzle (Domestic Shorthair)</p>
+                <p class="text-sm italic">"I received my tea exactly 12 seconds after I first meowed. The mug was also warm enough for me to sit on briefly. Absolute perfection. Five stars and a gentle rub against the ankles."</p>
+            </div>
+            
+            <div class="cat-review">
+                <p class="text-xl mb-1">★★★☆☆</p>
+                <p class="font-bold">Cosmo the Grey (Russian Blue)</p>
+                <p class="text-sm italic">"They got the croissant right, but the existential dread of being forced to interact with a clumsy biped dulled the flavor slightly. Competent, but spiritually draining. Perfectly average."</p>
             </div>
         </div>
+        
+        <div class="w-full md:w-1/3 max-w-sm sticky top-4">
+            
+            <div id="map-module" class="sepia-box mb-6">
+                <h3 class="text-xl font-bold mb-2 border-b border-dark-sepia pb-2 text-center">
+                    Find & Visit Us! 🐾
+                </h3>
+                <p class="text-sm italic mb-2 text-center text-red-700 font-bold">
+                    [Note: Lowie's Cafe is a fictional establishment.]
+                </p>
+                <div class="map-container">
+                    <img 
+                        src="https://imgur.com/cH8hMx5.jpeg" 
+                        alt="Fictional Map of Lowie's Cafe Location"
+                        class="map-image"
+                    >
+                </div>
+            </div>
+            
+            <div id="cat-info-module" class="sepia-box">
+                <h3 class="text-xl font-bold mb-4 border-b border-dark-sepia pb-2">
+                    Today's Featured Catstomer: Ethel
+                </h3>
+                <p class="text-sm italic mb-4">
+                    "Every visitor must give Ethel a gentle ear scratch before ordering."
+                </p>
+                <div class="text-sm">
+                    <p><strong>Name:</strong> Ethel</p>
+                    <p><strong>Age:</strong> 8 years old</p>
+                    <p><strong>Personality:</strong> Quiet but judgmental.</p>
+                    <p><strong>Favorite Drink:</strong> Caramel Macchiato</p>
+                    
+                    <img 
+                        src="https://media.tenor.com/sbfBfp3FeY8AAAAj/oia-uia.gif" 
+                        alt="A animated portrait of Ethel the cat"
+                        class="w-full mt-4 rounded-md border border-dark-sepia"
+                        onerror="this.src='https://placehold.co/300x200/463f39/e6e0d2?text=Ethel+Image';"
+                    >
+                    
+                    <iframe 
+                        id="ehtel-sound-embed"
+                        width="110" height="200" 
+                        src="https://www.myinstants.com/instant/oiia-oiia-sound-92058/embed/" 
+                        frameborder="0" scrolling="no" 
+                        class="mt-4 mx-auto block hidden">
+                    </iframe>
 
-    </div> 
+                    <button 
+                        id="toggle-sound-button"
+                        class="
+                            w-16 h-16 
+                            rounded-full 
+                            sepia-button 
+                            hover:bg-opacity-80 
+                            transition duration-300 
+                            text-4xl 
+                            flex items-center justify-center 
+                            mx-auto mt-4 
+                            shadow-lg
+                        ">
+                        ♪
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+        </div> 
 
 <script>
     /* --- ETHEL SOUND LOGIC REMAINS --- */
@@ -375,8 +450,10 @@
             const catImagePath = chosenCatImages[index]; // Assign a random cat image
             
             station.style.border = '2px dashed #a0522d'; 
-            station.ondrop = drop;
-            station.ondragover = allowDrop;
+            
+            // 🟢 FIX: Re-enable drag-and-drop handlers for the new round
+            station.ondrop = drop;         
+            station.ondragover = allowDrop; 
 
             station.setAttribute('data-order', orderKey);
             // Store the assigned image path to correctly reset the cat after an error
@@ -388,6 +465,7 @@
         DRAGGABLE_ITEM_IDS.forEach(itemId => {
             const item = document.getElementById(itemId);
             if (item) {
+                // 🟢 Reset ALL draggable properties
                 item.style.opacity = 1;
                 item.draggable = true;
                 item.style.cursor = 'grab';
